@@ -4,10 +4,13 @@ import java.time.LocalTime;
 
 public class Task {
     private long id;
-    private final String title;
-    private final String description;
-    private final boolean done;
-    private final LocalTime dueTime;
+    private String title;
+    private String description;
+    private boolean done;
+    private LocalTime dueTime;
+
+    public Task() {
+    }
 
     public Task(long id, String title, String description, boolean done, LocalTime dueTime) {
         this.id = id;
