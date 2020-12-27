@@ -7,22 +7,21 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class TaskController {
-    private final AtomicLong idCounter = new AtomicLong();
-    private final HashSet<Task> tasks = new HashSet();
+    @Autowired
+    private TaskRepository taskRepository;
 
     @GetMapping("/tasks")
-    public Collection<Task> getTasks() {
-        return tasks;
+    public Iterable<Task> getTasks() {
+        return taskRepository.findAll();
     }
 
     @PostMapping("/tasks")
     public Task postTask(@RequestBody Task task) {
-        task.setId(idCounter.getAndIncrement());
-        tasks.add(task);
-        return task;
+        return taskRepository.save(task);
     }
 }
