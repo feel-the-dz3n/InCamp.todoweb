@@ -1,46 +1,59 @@
 package com.incamp.todoweb;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalTime;
 
+@Entity
 public class Task {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
+
     private String title;
     private String description;
     private boolean done;
     private LocalTime dueTime;
 
-    public Task() {
-    }
-
-    public Task(long id, String title, String description, boolean done, LocalTime dueTime) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.done = done;
-        this.dueTime = dueTime;
-    }
-
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getTitle() {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public boolean isDone() {
         return done;
     }
 
+    public void setDone(boolean done) {
+        this.done = done;
+    }
+
     public LocalTime getDueTime() {
         return dueTime;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setDueTime(LocalTime dueTime) {
+        this.dueTime = dueTime;
     }
 }
