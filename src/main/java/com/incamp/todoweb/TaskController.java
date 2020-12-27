@@ -11,17 +11,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping(path = "/tasks")
 public class TaskController {
     @Autowired
-    private TaskRepository taskRepository;
+    private TaskService taskService;
 
-    @GetMapping("/tasks")
+    @GetMapping
     public Iterable<Task> getTasks() {
-        return taskRepository.findAll();
+        return taskService.getTasks();
     }
 
-    @PostMapping("/tasks")
+    @GetMapping("/{id}")
+    public Task getTaskById(@PathVariable Integer id) {
+        var task = taskService.getTaskById(id);
+        return task.isPresent() ? task.get() : null;
+    }
+
+    @PostMapping
     public Task postTask(@RequestBody Task task) {
-        return taskRepository.save(task);
+        return taskService.createTask(task);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteTask(@PathVariable Integer id) {
+        taskService.deleteTaskById(id);
+    }
+
+    @PutMapping("/{id}")
+    public Task putTask(@PathVariable Integer id, @RequestBody Task task) {
+        return taskService.updateTask(id, task);
     }
 }
