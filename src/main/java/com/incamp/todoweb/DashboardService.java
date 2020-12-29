@@ -11,6 +11,9 @@ public class DashboardService {
     @Autowired
     private TaskRepository taskRepository;
 
+    @Autowired
+    private TaskListRepository taskListRepository;
+
     public Dashboard get() {
         var dashboard = new Dashboard();
 
@@ -34,6 +37,9 @@ public class DashboardService {
 
         dashboard.setTodayTasksCount(
                 taskRepository.countTasksBetweenDate(startDateTime, endDateTime));
+
+        dashboard.setTaskLists(
+                taskListRepository.fetchTaskListInfo());
 
         return dashboard;
     }
