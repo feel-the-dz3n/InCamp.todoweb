@@ -3,7 +3,10 @@ package com.incamp.todoweb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
@@ -14,8 +17,15 @@ public class TaskService {
         return taskRepository.findById(id);
     }
 
-    public Iterable<Task> getTasks() {
-        return taskRepository.findAll();
+    public Collection<Task> getTasksByTaskList(TaskList taskList) {
+        return getTasks()
+                .stream()
+                .filter(x -> x.getTaskList() == taskList)
+                .collect(Collectors.toList());
+    }
+
+    public Collection<Task> getTasks() {
+        return (Collection<Task>)taskRepository.findAll();
     }
 
     public Task createTask(Task task) {
