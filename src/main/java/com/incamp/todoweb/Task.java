@@ -16,6 +16,7 @@ public class Task {
     private String description;
     private boolean done;
     private LocalTime dueTime;
+    private TaskList taskList;
 
     public Integer getId() {
         return id;
@@ -55,5 +56,13 @@ public class Task {
 
     public void setDueTime(LocalTime dueTime) {
         this.dueTime = dueTime;
+    }
+
+    public TaskList getTaskList() {
+        return taskList;
+    }
+
+    public void setTaskList(TaskList taskList) {
+        this.taskList = taskList;
     }
 }
