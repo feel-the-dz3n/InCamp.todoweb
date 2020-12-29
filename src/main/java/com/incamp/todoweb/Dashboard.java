@@ -3,22 +3,22 @@ package com.incamp.todoweb;
 import java.util.Collection;
 
 public class Dashboard {
-    private Integer todayTasksCount;
-    private Collection<TaskListInfo> TaskLists;
+    private Integer todayTasksLeft;
+    private Collection<TaskListInfo> taskLists;
 
-    public Integer getTodayTasksCount() {
-        return todayTasksCount;
+    public Integer getTodayTasksLeft() {
+        return todayTasksLeft;
     }
 
-    public void setTodayTasksCount(Integer todayTasksCount) {
-        this.todayTasksCount = todayTasksCount;
+    public void setTodayTasksLeft(Integer todayTasksLeft) {
+        this.todayTasksLeft = todayTasksLeft;
     }
 
     public Collection<TaskListInfo> getTaskLists() {
-        return TaskLists;
+        return taskLists;
     }
 
     public void setTaskLists(Collection<TaskListInfo> taskLists) {
-        TaskLists = taskLists;
+        this.taskLists = taskLists;
     }
 }

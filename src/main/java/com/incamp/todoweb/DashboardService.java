@@ -35,7 +35,7 @@ public class DashboardService {
                 59,
                 59);
 
-        dashboard.setTodayTasksCount(
+        dashboard.setTodayTasksLeft(
                 taskRepository.countTasksBetweenDate(startDateTime, endDateTime));
 
         dashboard.setTaskLists(
