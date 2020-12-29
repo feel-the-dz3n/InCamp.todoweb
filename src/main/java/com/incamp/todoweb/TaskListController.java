@@ -14,6 +14,6 @@ public class TaskListController {
 
     @GetMapping("/{id}/tasks")
     public Iterable<Task> getListTasks(@PathVariable Integer id, boolean all) {
-        return taskListService.getTaskListTasks(id, all);
+        return taskListService.getTaskListTasksFiltered(id, all);
     }
 }
