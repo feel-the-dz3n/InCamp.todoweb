@@ -2,10 +2,7 @@ package com.incamp.todoweb;
 
 import com.sun.istack.NotNull;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalTime;
 
 @Entity
@@ -24,6 +21,7 @@ public class Task {
     private LocalTime dueTime;
 
     @NotNull
+    @ManyToOne(fetch = FetchType.EAGER)
     private TaskList taskList;
 
     public Integer getId() {
