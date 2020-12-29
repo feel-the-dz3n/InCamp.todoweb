@@ -3,6 +3,7 @@ package com.incamp.todoweb;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -14,11 +15,10 @@ public class Task {
     @NotNull
     private String title;
 
-    @NotNull
     private String description;
 
     private boolean done;
-    private LocalTime dueTime;
+    private LocalDateTime dueTime;
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
@@ -56,11 +56,11 @@ public class Task {
         this.done = done;
     }
 
-    public LocalTime getDueTime() {
+    public LocalDateTime getDueTime() {
         return dueTime;
     }
 
-    public void setDueTime(LocalTime dueTime) {
+    public void setDueTime(LocalDateTime dueTime) {
         this.dueTime = dueTime;
     }
 
