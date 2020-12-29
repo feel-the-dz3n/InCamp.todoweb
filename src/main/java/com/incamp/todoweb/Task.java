@@ -1,5 +1,7 @@
 package com.incamp.todoweb;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,10 +14,16 @@ public class Task {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
+    @NotNull
     private String title;
+
+    @NotNull
     private String description;
+
     private boolean done;
     private LocalTime dueTime;
+
+    @NotNull
     private TaskList taskList;
 
     public Integer getId() {
