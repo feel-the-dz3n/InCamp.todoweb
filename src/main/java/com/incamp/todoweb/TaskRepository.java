@@ -8,8 +8,10 @@ import java.time.LocalDateTime;
 
 
 public interface TaskRepository extends CrudRepository<Task, Integer> {
+    // Count every incomplete task between dates
+    // TODO: put normally formatted request into orm.xml
     @Query("select count(task) from Task task where task.done=false and task.dueTime between :date1 and :date2")
-    Integer countTasksBetweenDate(
+    Integer countIncompleteTasksBetweenDate(
             @Param("date1") LocalDateTime date1,
             @Param("date2") LocalDateTime date2);
 }
