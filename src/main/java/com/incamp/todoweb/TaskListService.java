@@ -24,6 +24,7 @@ public class TaskListService {
 
         if (!all) {
             // If not all, then return only not completed tasks
+            // TODO: implement HQL request instead of using streams
             return tasks
                     .stream()
                     .filter(x -> !x.isDone())
