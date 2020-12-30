@@ -14,6 +14,7 @@ public class TaskCollectionService {
 
     // Returns tasks that are not done yet at some date
     public Collection<Task> getTasksForDate(LocalDateTime date) {
+        // TODO: use HQL requests instead of streams
         return taskService
                 .getTasks()
                 .stream()
