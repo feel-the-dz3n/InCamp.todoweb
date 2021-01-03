@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Collection;
 
 @RestController
@@ -16,6 +16,6 @@ public class TaskCollectionController {
 
     @GetMapping("/today")
     public Collection<Task> getTasksForToday() {
-        return taskCollectionService.getTasksForDate(LocalDateTime.now());
+        return taskCollectionService.getIncompleteTasksForDate(LocalDate.now());
     }
 }

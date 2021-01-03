@@ -3,7 +3,9 @@ package com.incamp.todoweb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -12,18 +14,13 @@ public class TaskCollectionService {
     @Autowired
     private TaskRepository taskRepository;
 
-    // Returns tasks that are not done yet at some date
-    public Collection<Task> getTasksForDate(LocalDateTime date) {
-        // TODO: use HQL requests instead of streams
-        return taskRepository.getIncompleteTasksBetweenDateTime(date, date);
-        return taskService
-                .getTasks()
-                .stream()
-                .filter(x -> !x.isDone()
-                        && x.getDueTime() != null
-                        && x.getDueTime().getYear() == date.getYear()
-                        && x.getDueTime().getMonth() == date.getMonth()
-                        && x.getDueTime().getDayOfMonth() == date.getDayOfMonth())
-                .collect(Collectors.toList());
+    public Collection<Task> getIncompleteTasksForDate(LocalDate date) {
+        return getIncompleteTasksBetweenDateTime(
+                date.atStartOfDay(),
+                date.atTime(LocalTime.MAX));
+    }
+
+    public Collection<Task> getIncompleteTasksBetweenDateTime(LocalDateTime fromDateTime, LocalDateTime toDateTime) {
+        return taskRepository.getIncompleteTasksBetweenDateTime(fromDateTime, toDateTime);
     }
 }
