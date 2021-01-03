@@ -18,10 +18,7 @@ public class TaskService {
     }
 
     public Collection<Task> getTasksByTaskList(TaskList taskList) {
-        return getTasks()
-                .stream()
-                .filter(x -> x.getTaskList() == taskList)
-                .collect(Collectors.toList());
+        return taskRepository.getTasksByTaskList(taskList);
     }
 
     public Collection<Task> getTasks() {

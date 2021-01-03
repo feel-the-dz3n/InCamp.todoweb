@@ -36,7 +36,7 @@ public class DashboardService {
                 59);
 
         dashboard.setTodayTasksLeft(
-                taskRepository.countIncompleteTasksBetweenDate(startDateTime, endDateTime));
+                taskRepository.countIncompleteTasksBetweenDateTime(startDateTime, endDateTime));
 
         dashboard.setTaskLists(
                 taskListRepository.fetchTaskListInfo());

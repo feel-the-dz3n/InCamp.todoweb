@@ -10,11 +10,12 @@ import java.util.stream.Collectors;
 @Service
 public class TaskCollectionService {
     @Autowired
-    private TaskService taskService;
+    private TaskRepository taskRepository;
 
     // Returns tasks that are not done yet at some date
     public Collection<Task> getTasksForDate(LocalDateTime date) {
         // TODO: use HQL requests instead of streams
+        return taskRepository.getIncompleteTasksBetweenDateTime(date, date);
         return taskService
                 .getTasks()
                 .stream()

@@ -13,6 +13,9 @@ public class TaskListService {
     private TaskListRepository taskListRepository;
 
     @Autowired
+    private TaskRepository taskRepository;
+
+    @Autowired
     private TaskService taskService;
 
     public Optional<TaskList> getTaskList(Integer id) {
@@ -20,18 +23,12 @@ public class TaskListService {
     }
 
     public Collection<Task> getTaskListTasksFiltered(Integer id, boolean all) {
-        var tasks = getTaskListTasks(id);
-
         if (!all) {
             // If not all, then return only not completed tasks
-            // TODO: implement HQL request instead of using streams
-            return tasks
-                    .stream()
-                    .filter(x -> !x.isDone())
-                    .collect(Collectors.toList());
+            return taskRepository.GetIncompleteTasksByTaskList(getTaskList(id).get());
         } else {
             // Return all tasks
-            return tasks;
+            return getTaskListTasks(id);
         }
     }
 

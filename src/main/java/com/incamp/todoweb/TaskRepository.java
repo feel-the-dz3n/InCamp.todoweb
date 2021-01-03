@@ -5,13 +5,32 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 
 public interface TaskRepository extends CrudRepository<Task, Integer> {
-    // Count every incomplete task between dates
-    // TODO: put normally formatted request into orm.xml
-    @Query("select count(task) from Task task where task.done=false and task.dueTime between :date1 and :date2")
-    Integer countIncompleteTasksBetweenDate(
-            @Param("date1") LocalDateTime date1,
-            @Param("date2") LocalDateTime date2);
+    @Query("select count(task) from Task task " +
+            "where task.done=false " +
+            "and task.dueTime between :fromDateTime and :toDate")
+    Integer countIncompleteTasksBetweenDateTime(
+            @Param("fromDateTime") LocalDateTime fromDateTime,
+            @Param("toDateTime") LocalDateTime toDateTime);
+
+    @Query("select task from Task task " +
+            "where task.taskList=:taskList " +
+            "and task.done=false")
+    Collection<Task> GetIncompleteTasksByTaskList(
+            @Param("taskList") TaskList taskList);
+
+    @Query("select task from Task task " +
+            "where task.taskList=:taskList")
+    Collection<Task> getTasksByTaskList(
+            @Param("taskList") TaskList taskList);
+
+    @Query("select task from Task task " +
+            "where task.done=false " +
+            "and task.dueTime between :startDateTime and :endDateTime")
+    Collection<Task> getIncompleteTasksBetweenDateTime(
+            @Param("fromDateTime") LocalDateTime fromDateTime,
+            @Param("toDateTime") LocalDateTime toDateTime);
 }
