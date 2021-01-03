@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Service
 public class DashboardService {
@@ -16,27 +17,12 @@ public class DashboardService {
 
     public Dashboard get() {
         var dashboard = new Dashboard();
-
-        // Since repository can handle only DateTime,
-        // we will use the beginning of the current day as the date "since"
-        // and the ending of the current date as the date "until"
         var currentDate = LocalDate.now();
-        var startDateTime = LocalDateTime.of(
-                currentDate.getYear(),
-                currentDate.getMonth(),
-                currentDate.getDayOfMonth(),
-                0,
-                0);
-        var endDateTime = LocalDateTime.of(
-                currentDate.getYear(),
-                currentDate.getMonth(),
-                currentDate.getDayOfMonth(),
-                23,
-                59,
-                59);
 
         dashboard.setTodayTasksLeft(
-                taskRepository.countIncompleteTasksBetweenDateTime(startDateTime, endDateTime));
+                taskRepository.countIncompleteTasksBetweenDateTime(
+                        currentDate.atStartOfDay(),
+                        currentDate.atTime(LocalTime.MAX)));
 
         dashboard.setTaskLists(
                 taskListRepository.fetchTaskListInfo());
