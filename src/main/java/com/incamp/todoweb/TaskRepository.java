@@ -11,7 +11,7 @@ import java.util.Collection;
 public interface TaskRepository extends CrudRepository<Task, Integer> {
     @Query("select count(task) from Task task " +
             "where task.done=false " +
-            "and task.dueTime between :fromDateTime and :toDate")
+            "and task.dueTime between :fromDateTime and :toDateTime")
     Integer countIncompleteTasksBetweenDateTime(
             @Param("fromDateTime") LocalDateTime fromDateTime,
             @Param("toDateTime") LocalDateTime toDateTime);
@@ -29,7 +29,7 @@ public interface TaskRepository extends CrudRepository<Task, Integer> {
 
     @Query("select task from Task task " +
             "where task.done=false " +
-            "and task.dueTime between :startDateTime and :endDateTime")
+            "and task.dueTime between :fromDateTime and :toDateTime")
     Collection<Task> getIncompleteTasksBetweenDateTime(
             @Param("fromDateTime") LocalDateTime fromDateTime,
             @Param("toDateTime") LocalDateTime toDateTime);
