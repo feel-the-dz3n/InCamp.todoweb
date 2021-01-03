@@ -4,7 +4,7 @@ import java.util.Collection;
 
 public class Dashboard {
     private Integer todayTasksLeft;
-    private Collection<TaskListInfo> taskLists;
+    private Collection<TaskListInfoDTO> taskLists;
 
     public Integer getTodayTasksLeft() {
         return todayTasksLeft;
@@ -14,11 +14,11 @@ public class Dashboard {
         this.todayTasksLeft = todayTasksLeft;
     }
 
-    public Collection<TaskListInfo> getTaskLists() {
+    public Collection<TaskListInfoDTO> getTaskLists() {
         return taskLists;
     }
 
-    public void setTaskLists(Collection<TaskListInfo> taskLists) {
+    public void setTaskLists(Collection<TaskListInfoDTO> taskLists) {
         this.taskLists = taskLists;
     }
 }
