@@ -21,7 +21,9 @@ public class DashboardService {
 
         dashboard.setTodayTasksLeft(
                 taskRepository.countIncompleteTasksBetweenDateTime(
-                        currentDate.atStartOfDay(),
+                        // quick workaround: LocalDateTime.MIN won't work with current SQL request
+                        // this code exists since 2020 hence we will count tasks since 2005
+                        LocalDateTime.of(2005, 01, 01, 01, 01),
                         currentDate.atTime(LocalTime.MAX)));
 
         dashboard.setTaskLists(

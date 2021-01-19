@@ -20,4 +20,9 @@ public class TaskCollectionController {
     public Collection<Task> getTasksForToday() {
         return taskCollectionService.getIncompleteTasksForDate(LocalDate.now());
     }
+
+    @GetMapping("/until-today")
+    public Collection<Task> getTasksUntilToday() {
+        return taskCollectionService.getIncompleteTasksUntilDate(LocalDate.now());
+    }
 }
